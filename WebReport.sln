@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebReport", "WebReport\WebReport.csproj", "{B5D3E082-9AE1-459A-8E40-5030837091D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{538B0C00-F909-4206-8B24-534562C9D4D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStruct", "DataStruct\DataStruct.csproj", "{913773B4-599C-4A9F-8FDE-51AFB96B2575}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5D3E082-9AE1-459A-8E40-5030837091D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5D3E082-9AE1-459A-8E40-5030837091D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5D3E082-9AE1-459A-8E40-5030837091D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5D3E082-9AE1-459A-8E40-5030837091D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538B0C00-F909-4206-8B24-534562C9D4D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538B0C00-F909-4206-8B24-534562C9D4D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538B0C00-F909-4206-8B24-534562C9D4D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538B0C00-F909-4206-8B24-534562C9D4D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913773B4-599C-4A9F-8FDE-51AFB96B2575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913773B4-599C-4A9F-8FDE-51AFB96B2575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913773B4-599C-4A9F-8FDE-51AFB96B2575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913773B4-599C-4A9F-8FDE-51AFB96B2575}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B226DF46-3B50-4A88-A976-453E6DD64F1A}
+	EndGlobalSection
+EndGlobal

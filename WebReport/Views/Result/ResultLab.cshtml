@@ -1,0 +1,179 @@
+﻿@model DataStruct.ResultDetailViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageCss
+{
+    <link href="~/assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    }
+
+
+@section PageJs
+{
+    
+    <script src="~/assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+}
+
+@section PageJsScript
+{
+    <script>
+        $('#myTable').DataTable({
+  "ordering": false
+});
+    </script>
+
+
+}
+
+
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">LIS Viewer</h4> 
+    </div>
+
+    <!-- /.col-lg-12 -->
+</div>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+
+            <form class="form">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <label for="example-text-input" class="col-3 col-form-label">No Lab</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Model.HeaderData.Rows[0]["LabNo"].ToString()</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">No MR</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Model.HeaderData.Rows[0]["PatientID"].ToString()</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">Nama Pasien</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Model.HeaderData.Rows[0]["PatientName"].ToString()</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">Umur</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@DataAccess.HelperClass.CalculateYourAge(Convert.ToDateTime(Model.HeaderData.Rows[0]["PatientTglLahir"]),Convert.ToDateTime(Model.HeaderData.Rows[0]["RegDate"]))</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">Jam Sampling</label>
+                            <div class="col-9">
+                                :  &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Convert.ToDateTime(Model.HeaderData.Rows[0]["SampelTerimaDate"]).ToString("HH:mm:ss")</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">Alamat</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Model.HeaderData.Rows[0]["PatientAddress"].ToString()</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <label for="example-text-input" class="col-3 col-form-label">Tgl Registrasi</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Convert.ToDateTime(Model.HeaderData.Rows[0]["RegDate"]).ToString("dd MMMM yyyy")</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">No Barcode</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Model.HeaderData.Rows[0]["BarcodeNo"].ToString()</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">Ruangan</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Model.HeaderData.Rows[0]["PoliklinikName"].ToString()</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">Rujukan</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="example-search-input" class="col-3 col-form-label">Dokter</label>
+                            <div class="col-9">
+                                : &nbsp;&nbsp; <label for="example-search-input" class="col-form-label">@Model.HeaderData.Rows[0]["DokterName"].ToString()</label>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+                <a href="@Request.UrlReferrer" class="btn btn-info">Kembali ke Daftar</a>
+            </form>
+
+            
+                
+                <div class="table-responsive">
+                    <table id="myTable" class="table table-striped color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>Pemeriksaan</th>
+                                <th>Flag</th>
+                                <th>Hasil</th>
+                                <th>Unit</th>
+                                <th>Nilai Rujukan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var GroupName = "";
+                                var TestName = "";
+                            }
+                            @foreach (System.Data.DataRow row in Model.ResultData.Rows)
+                            {
+                                if (GroupName != row["GroupName"].ToString())
+                                {
+                                    <tr>
+                                        <td colspan="5">
+                                            <b>@row["GroupName"].ToString()</b>
+                                        </td>
+                                    </tr>
+                                    GroupName = row["GroupName"].ToString();
+                                }
+                                if (TestName != row["TestName"].ToString())
+                                {
+                                    <tr>
+                                        <td colspan="5">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>@row["TestName"].ToString()</b>
+                                        </td>
+                                    </tr>
+                                    TestName = row["TestName"].ToString();
+                                }
+                                <tr>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@row["FractionName"].ToString()</td>
+                                    <td></td>
+                                    <td>@row["ResultValue"].ToString()</td>
+                                    <td>@row["UnitName"].ToString()</td>
+                                    <td>@row["NormalValue"].ToString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+
+</div>

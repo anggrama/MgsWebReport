@@ -1,0 +1,111 @@
+﻿@model  DataStruct.ResultViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageCss
+{
+    <link href="~/assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+}
+
+
+@section PageJs
+{
+
+    <script src="~/assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+}
+
+@section PageJsScript
+{
+    <script>
+        $('#myTable').DataTable({
+  "ordering": false
+});
+    </script>
+
+
+}
+
+
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">LIS Viewer</h4>
+    </div>
+
+    <!-- /.col-lg-12 -->
+</div>
+
+<!-- .row -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="white-box">
+            <form action="@Url.Action("Index","Result")">
+                <div class="row">
+                    <input type="hidden" value="@Model.Type" name="type" />
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class="control-label">Tanggal Registrasi</label>
+                            <input class="form-control" type="date" value="@Model.StartDate" placeholder="dd-mm-yyyy" id="startDate" name="startDate">
+                        </div>
+                    </div>
+                    <div style="margin-top:35px">
+                        <label class="control-label">s/d</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class="control-label">&nbsp;</label>
+                            <input class="form-control" type="date" value="@Model.EndDate" placeholder="dd-mm-yyyy" id="endDate" name="endDate">
+                        </div>
+                    </div>
+                    <div class="col-lg-1" style="margin-top:27px">
+                        <button type="submit" class="btn btn-primary"> Filter </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--/.row -->
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title m-b-0">Data Registrasi</h3>
+            <p class="text-muted m-b-30"></p>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped color-table info-table">
+                    <thead>
+                        <tr>
+                            <th>No Lab</th>
+                            <th>Tgl Registrasi</th>
+                            <th>No Rekam Medis</th>
+                            <th>Nama Pasien</th>
+                            <th>Dokter</th>
+                            <th>Poliklinik</th>
+                            <th>Tipe</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (System.Data.DataRow row in Model.Data.Rows)
+                        {
+                            <tr>
+                                <td><a href="@Url.Action("ResultLab", "Result", new { type=Model.Type,regNo = row["RegId"].ToString() })"><i class="fa fa-search text-inverse m-r-10"></i> @row["RegId"].ToString() </a></td>
+                                <td>@Convert.ToDateTime(row["RegDate"]).ToString("dd-MM-yyyy")</td>
+                                <td>@row["PatientId"].ToString()</td>
+                                <td>@row["PatientName"].ToString()</td>
+                                <td>@row["DokterName"].ToString()</td>
+                                <td>@row["PoliklinikName"].ToString()</td>
+                                <td>@row["RegType"].ToString()</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

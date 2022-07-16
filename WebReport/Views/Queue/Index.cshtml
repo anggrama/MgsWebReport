@@ -1,0 +1,150 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <title>Laboratory Queue</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="~/assets/css/animate.css" rel="stylesheet">
+    <link href="~/assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="~/assets/css/style.css" rel="stylesheet">
+    <style>
+         th {
+            font-size:large;
+         
+            
+        }
+        td {
+            font-size:large;
+            font-weight:bold;
+            padding:10px 5px !important;
+            
+        }
+        .data-finish {
+            background-color:paleturquoise !important;
+        }
+        
+    </style>
+    <!-- color CSS -->
+    <link href="~/assets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="row">
+        <!--<div class="col-lg-5" style="background-image: url('../../Assets/images/gedung1-e1550730720260.jpg') !important">
+
+    </div>-->
+        <div class="col-lg-5">
+            <div id="car" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/Assets/images/gedung1-e1550730720260.jpg" class="d-block" alt="" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Assets/images/rs1.jpg" class="d-block" alt="" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Assets/images/lab1.jpg" class="d-block" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="table-responsive">
+                <table id="myTable" class="table color-table info-table">
+                    <thead>
+                        <tr>
+                            <th>No Registrasi</th>
+                            <th>No RM</th>
+                            <th>Nama</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+   
+    <!-- jQuery -->
+    <script src="~/assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/assets/bootstrap/dist/js/tether.min.js"></script>
+    <script src="~/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="~/assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="~/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/assets/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/assets/js/custom.min.js"></script>
+    <script>
+        var myTable = null;
+        $(document).ready(function () {
+            $("#car").carousel({
+                interval: 3000
+            });
+
+            myTable = $("#myTable").DataTable(
+            {
+                ordering: false,
+                paging: false,
+                searching: false,
+                bInfo: false,
+                    ajax: {
+                        url: "@Url.Action("GetQueue","Queue")",
+                        dataSrc:''
+                    },
+                columns: [
+                                { data: "NoLab" },
+                                { data: "NoRM" },
+                                { data: "PatientName" },
+                                { data: "Status" },
+                    ],
+                    createdRow: function (row, data, dataIndex) {
+                        if (data['Status'] == 'Hasil Selesai') {
+                            $(row).addClass('data-finish')
+                        }
+                    }
+
+                });
+
+            setInterval(function () { RefreshAjax(); }, 10000);
+        });
+
+        function RefreshAjax() {
+            myTable.ajax.reload();
+        }
+    </script>
+
+</body>
+
+</html>
