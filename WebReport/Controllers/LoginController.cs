@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace PktReport.Controllers
+namespace WebReport.Controllers
 {
     public class LoginController : Controller
     {

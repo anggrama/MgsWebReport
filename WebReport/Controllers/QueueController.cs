@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 using System.Data;
 
-namespace PktReport.Controllers
+namespace WebReport.Controllers
 {
     public class QueueController : Controller
     {

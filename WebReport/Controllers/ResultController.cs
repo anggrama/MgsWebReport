@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace PktReport.Controllers
+namespace WebReport.Controllers
 {
     public class ResultController : Controller
     {
